@@ -1,0 +1,114 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Full page background */
+  body {
+    font-family: Arial, sans-serif;
+    background: url('/images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Signup Container */
+  .signup-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Signup Form */
+  .signup-form {
+    text-align: center;
+  }
+  
+  .message {
+    display: block;  /* Show the message container*/
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+  } 
+  
+  .error-message {
+    /* background-color: #f8d7da; */
+    color: #e1172c;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-weight: bold ;  /* Makes the text bold */
+  font-size: 40px;
+  }
+  
+  .success-message {
+    /* background-color: #d4edda; */
+    color: #155724;
+    font-weight: bold;  /* Makes the text bold */
+  font-size: 20px;
+  }
+  
+  /* Form Labels */
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Input Fields */
+  .input-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Button */
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Link to login */
+  .signup-form p {
+    font-size: 14px;
+  }
+  
+  .signup-form p a {
+    text-decoration: none;
+    color: #4CAF50;
+  }
+  
+  .signup-form p a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,158 @@
+/* Background Video */
+#background-video {
+    position: fixed;  /* Keeps the video in place */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the whole background */
+    z-index: -1;      /* Places the video behind all other content */
+  }
+  
+  /* Main body and content styling */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    position: relative; /* Required to keep content on top of video */
+  }
+  
+  header {
+    background-color: rgba(51, 51, 51, 0.8); /* Make header semi-transparent */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+  
+  header .login-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  header .login-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  main {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .contact-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    background-color: rgba(117, 117, 117, 0.8);
+     margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-info h2 {
+    color: #ff7f27;
+  }
+  
+  .contact-info p {
+    margin: 5px 0;
+  }
+  
+  .contact-info .btn {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .contact-info .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .content {
+    flex: 2;
+    min-width: 300px;
+    padding: 20px;
+    background-color: rgba(117, 117, 117, 0.8);
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content img {
+    max-width: 100%;
+    height: auto;
+    width: 400px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .content h2 {
+    color: #cecaca;
+    margin-bottom: 10px;
+  }
+
+  .content h3 {
+    color: #cecaca;
+    margin-bottom: 10px;
+  }
+  
+  .society-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .society-list li {
+    margin-bottom: 10px;
+  }
+  
+  .dropdown-btn {
+    background-color: #cccaca;
+    border: none;
+    padding: 10px 20px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .dropdown-btn:hover {
+    background-color: #575656;
+  }
+  
+  .dropdown-content {
+    display: none;
+    margin: 10px 0;
+    margin-top: 5px;
+    padding: 10px;
+    font-weight: bold;
+    color: #cccaca;
+  }
+  
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Dropdown content display when active */
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
+  

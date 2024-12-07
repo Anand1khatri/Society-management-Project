@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Member</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/add.css">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="logo">
+      <h1>Admin Portal</h1>
+    </div>
+    <div class="user-profile">
+      <button class="dropdown-btn">
+        <i class="fas fa-user-circle"></i> <%= adminEmail %>
+      </button>
+      <div class="dropdown-content">
+        <p>Logged in as: <%= adminEmail %></p>
+        <a href="/admin/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li>
+          <button onclick="loadContent('society')">
+            <i class="fas fa-building"></i> Societies
+          </button>
+        </li>
+        <li>
+          <button onclick="loadContent('Event')">
+            <i class="fas fa-calendar-alt"></i> Events
+          </button>
+        </li>
+        <li>
+          <button onclick="loadContent('competitions')">
+            <i class="fas fa-trophy"></i> Competitions
+          </button>
+        </li>
+        <li>
+          <button onclick="loadContent('participants')">
+            <i class="fas fa-users"></i> Participants
+          </button>
+        </li>
+        <li>
+          <button onclick="loadContent('attendees')">
+            <i class="fas fa-users"></i> Event Attendees
+          </button>
+        </li>
+        <li>
+          <button onclick="loadContent('members')">
+            <i class="fas fa-users"></i> Society Members
+          </button>
+        </li>
+      </ul>
+    </aside>
+    <main class="content-area">
+      <div id="dynamic-content">
+        <header>
+          <h1><%= title %></h1>
+        </header>
+
+        <form action="/teamMembers/<%= member.member_id %>/edit" method="POST">
+          <label for="member_id">Member ID:</label>
+          <input type="text" id="member_id" name="member_id" value="<%= member.member_id %>" readonly><br>
+
+          <label for="roll_no">Roll No:</label>
+          <input type="text" id="roll_no" name="roll_no" value="<%= member.roll_no %>" required><br>
+
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" value="<%= member.name %>" required><br>
+
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone" name="phone" value="<%= member.phone %>" required><br>
+
+          <label for="society_id">Society ID:</label>
+          <input type="text" id="society_id" name="society_id" value="<%= member.society_id %>" required><br>
+
+          <label for="department">Department:</label>
+          <select id="department" name="department" required onchange="updatePositionOptions()">
+            <option value="">Select Department</option>
+            <% validDepartments.forEach(department => { %>
+              <option value="<%= department %>" <%= department === member.department ? 'selected' : '' %>><%= department %></option>
+            <% }); %>
+          </select><br>
+
+          <label for="position">Position:</label>
+          <select id="position" name="position" required>
+            <option value="">Select Position</option>
+            <!-- Options will be dynamically populated based on department selection -->
+          </select><br>
+
+          <% if (errors && errors.duplicatePosition) { %>
+            <div class="error_red_msg"><%= errors.duplicatePosition %></div>
+          <% } %><br>
+
+          <button type="submit">Update Member</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Define position options for different departments
+    const positionsForExcom = ['President', 'Vice President', 'Secretary', 'Treasurer', 'General Secretary', 'Event Manager'];
+    const positionsForOther = ['Head', 'Co-Head', 'Member'];
+
+    function updatePositionOptions() {
+      const departmentSelect = document.getElementById('department');
+      const positionSelect = document.getElementById('position');
+
+      // Clear current position options
+      positionSelect.innerHTML = '<option value="">Select Position</option>';
+
+      // Determine which positions to show based on the selected department
+      const selectedDepartment = departmentSelect.value;
+      let positions = [];
+
+      if (selectedDepartment === 'Excom') {
+        positions = positionsForExcom;
+      } else if (selectedDepartment) {
+        positions = positionsForOther;
+      }
+
+      // Populate the position dropdown
+      positions.forEach(position => {
+        const option = document.createElement('option');
+        option.value = position;
+        option.textContent = position;
+        option.selected = position === '<%= member.position %>';
+        positionSelect.appendChild(option);
+      });
+    }
+
+    // Initialize the position dropdown with the current selection when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      updatePositionOptions();
+      // Pre-select the current position
+      const departmentSelect = document.getElementById('department');
+      const selectedDepartment = departmentSelect.value;
+      let positions = [];
+
+      if (selectedDepartment === 'Excom') {
+        positions = positionsForExcom;
+      } else if (selectedDepartment) {
+        positions = positionsForOther;
+      }
+
+      const positionSelect = document.getElementById('position');
+      positions.forEach(position => {
+        const option = document.createElement('option');
+        option.value = position;
+        option.textContent = position;
+        if (position === '<%= member.position %>') {
+          option.selected = true;
+        }
+        positionSelect.appendChild(option);
+      });
+    });
+
+    function loadContent(endpoint) {
+      fetch(`/admin/${endpoint}`)
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('dynamic-content').innerHTML = html;
+        })
+        .catch(error => console.error('Error loading content:', error));
+    }
+  </script>
+</body>
+</html>
